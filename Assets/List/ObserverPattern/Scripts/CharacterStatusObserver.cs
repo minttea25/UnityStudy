@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ObserverPattern
 {
-    public class CharacterStatusObserver : IObserverCharacter
+    public class CharacterStatusObserver : IObserver<Character>
     {
         #region IObserver 
 
@@ -16,7 +16,7 @@ namespace ObserverPattern
                 Debug.LogError($"There is no character id = {id}");
                 return;
             }
-            UpdateData(c);
+            UpdateData(c.Chara);
         }
 
         public void OnNotify(Character chara)
@@ -24,7 +24,7 @@ namespace ObserverPattern
             GameObject.Find("UIHandler").GetComponent<UIHandler>().CharacterUpdateUI(chara);
         }
 
-        public void UpdateData<T>(T t)
+        public void UpdateData(Character chara)
         {
             throw new System.NotImplementedException();
         }

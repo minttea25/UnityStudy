@@ -6,8 +6,15 @@ namespace ObserverPattern
 {
     public interface ISubject
     {
-        void AddObserver(IObserverCharacter o);
-        void RemoveObserver(IObserverCharacter o);
+        void AddObserver(IObserver o);
+        void RemoveObserver(IObserver o);
+        void NotifyObservers();
+    }
+
+    public interface ISubject<T>
+    {
+        void AddObserver(IObserver<T> o);
+        void RemoveObserver(IObserver<T> o);
         void NotifyObservers();
     }
 }

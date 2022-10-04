@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace ObserverPattern
 {
-    public class Character : MonoBehaviour, ISubject
+    public class Character : MonoBehaviour, ISubject<Character>
     {
         [SerializeField] CharacterType type;
         int level;
         new string name;
         int hp;
 
-        List<IObserverCharacter> observers = new List<IObserverCharacter>();
+        List<IObserver<Character>> observers = new List<IObserver<Character>>();
 
         public CharacterType Type
         {
@@ -68,7 +68,7 @@ namespace ObserverPattern
         }
 
         #region ISubject Methods
-        public void AddObserver(IObserverCharacter o)
+        public void AddObserver(IObserver<Character> o)
         {
             if (observers.IndexOf(o) < 0)
             {
@@ -80,7 +80,7 @@ namespace ObserverPattern
             }
         }
 
-        public void RemoveObserver(IObserverCharacter o)
+        public void RemoveObserver(IObserver<Character> o)
         {
             int idx = observers.IndexOf(o);
             if (idx >= 0)
@@ -95,7 +95,7 @@ namespace ObserverPattern
 
         public void NotifyObservers()
         {
-            foreach (IObserverCharacter o in observers)
+            foreach (IObserver<Character> o in observers)
             {
                 Debug.Log("Character.hash: " + this.GetHashCode());
                 o.OnNotify(this);
